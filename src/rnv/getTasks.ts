@@ -61,7 +61,7 @@ const mergePlatforms = (config: Config | RawConfig, configToExtend: Config | Raw
 };
 
 const isRawConfig = (config: Config | RawConfig): config is RawConfig => (
-    Object.prototype.hasOwnProperty.call(config, 'extend')
+    Object.prototype.hasOwnProperty.call(config, 'id')
 );
 
 const parseConfig = (
