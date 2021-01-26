@@ -9,8 +9,8 @@ export function activate() {
         terminal.show();
         terminal.sendText(
             data
-                ? `rnv ${data.task} -p ${data.platform} -c ${data.config} -s ${data.scheme}`
-                : 'rnv --help',
+                ? `npx rnv ${data.task} -p ${data.platform} -c ${data.config} -s ${data.scheme}`
+                : 'npx rnv --help',
         );
     });
     vscode.window.registerTreeDataProvider('rnv', new RNVTasksTreeView());
