@@ -18,11 +18,26 @@
 	],
 	"main": "./out/extension.js",
 	"contributes": {
+		"commands": [
+			{
+				"category": "context",
+				"command": "extension.rnv.copy",
+				"title": "Copy command"
+			}
+		],
 		"views": {
 			"explorer": [
 				{
 					"id": "rnv",
 					"name": "ReNative"
+				}
+			]
+		},
+		"menus": {
+			"view/item/context": [
+				{
+					"command": "extension.rnv.copy",
+					"when": "viewItem == rnvLaunch"
 				}
 			]
 		}

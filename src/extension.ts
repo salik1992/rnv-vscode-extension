@@ -1,17 +1,8 @@
 import * as vscode from 'vscode';
-import { RNVTasksTreeView, TaskByTaskName } from './rnv';
+import { RNVTasksTreeView, copy, launch } from './rnv';
 
 export function activate() {
-    vscode.commands.registerCommand('extension.rnv.launch', (data?: TaskByTaskName) => {
-        const terminal = vscode.window.createTerminal({
-            name: 'RNV',
-        });
-        terminal.show();
-        terminal.sendText(
-            data
-                ? `npx rnv ${data.task} -p ${data.platform} -c ${data.config} -s ${data.scheme}`
-                : 'npx rnv --help',
-        );
-    });
+    vscode.commands.registerCommand('extension.rnv.launch', launch);
+    vscode.commands.registerCommand('extension.rnv.copy', copy);
     vscode.window.registerTreeDataProvider('rnv', new RNVTasksTreeView());
 }

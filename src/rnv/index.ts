@@ -1,2 +1,2 @@
 export { RNVTasksTreeView } from './view';
-export { TaskByTaskName } from './types';
+export { copy, launch } from './actions';
