@@ -18,12 +18,6 @@
 	],
 	"main": "./out/extension.js",
 	"contributes": {
-		"commands": [
-			{
-				"command": "extension.rnv.refresh",
-				"title": "Refresh RNV extension"
-			}
-		],
 		"views": {
 			"explorer": [
 				{
