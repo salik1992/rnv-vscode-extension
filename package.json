@@ -1,7 +1,7 @@
 {
 	"private": true,
 	"name": "rnv-vscode-extension",
-	"displayName": "rnv-vscode-extension",
+	"displayName": "ReNative",
 	"description": "ReNative extension for VSCode",
 	"version": "0.0.1",
 	"publisher": "salik1992",
@@ -26,12 +26,12 @@
 		],
 		"views": {
 			"explorer": [
-			  {
-				"id": "rnv",
-				"name": "ReNative"
-			  }
+				{
+					"id": "rnv",
+					"name": "ReNative"
+				}
 			]
-		  }
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
