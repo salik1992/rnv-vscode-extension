@@ -1,0 +1,50 @@
+{
+	"private": true,
+	"name": "rnv-vscode-extension",
+	"displayName": "rnv-vscode-extension",
+	"description": "ReNative extension for VSCode",
+	"version": "0.0.1",
+	"publisher": "salik1992",
+	"repository": "https://github.com/salik1992/rnv-vscode-extension",
+	"engines": {
+		"vscode": "^1.34.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"workspaceContains:**/renative.json",
+		"onCommand:extension.rnv.refresh"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.rnv.refresh",
+				"title": "Refresh RNV extension"
+			}
+		],
+		"views": {
+			"explorer": [
+			  {
+				"id": "rnv",
+				"name": "ReNative"
+			  }
+			]
+		  }
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"lint": "eslint . --ext .ts,.tsx",
+		"watch": "tsc -watch -p ./"
+	},
+	"devDependencies": {
+		"@types/node": "^12.12.0",
+		"@types/vscode": "^1.34.0",
+		"@typescript-eslint/eslint-plugin": "^3.0.2",
+		"@typescript-eslint/parser": "^3.0.2",
+		"eslint": "^7.1.0",
+		"typescript": "^4.0.2"
+	}
+}
