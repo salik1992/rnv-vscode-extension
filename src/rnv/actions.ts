@@ -2,9 +2,11 @@ import * as vscode from 'vscode';
 import { Task } from "./types";
 import { RNVTask } from './view';
 
-const dataToCommand = (data: Task) => (
-    `npx rnv ${data.task} -p ${data.platform} -c ${data.config} -s ${data.scheme}`
-);
+const dataToCommand = (data: Task) => {
+    const configuration = vscode.workspace.getConfiguration('rnv');
+    const runner = configuration.get<string>('runner');
+    return `${runner === '' ? '' : `${runner} `}rnv ${data.task} -p ${data.platform} -c ${data.config} -s ${data.scheme}`;
+};
 
 export const launch = (data?: Task) => {
     const terminal = vscode.window.createTerminal({

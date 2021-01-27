@@ -40,6 +40,16 @@
 					"when": "viewItem == rnvLaunch"
 				}
 			]
+		},
+		"configuration": {
+			"title": "ReNative",
+			"properties": {
+				"rnv.runner": {
+					"type": "string",
+					"default": "npx",
+					"description": "Run rnv through a runner like npx for example. Leave empty to run rnv directly."
+				}
+			}
 		}
 	},
 	"scripts": {
