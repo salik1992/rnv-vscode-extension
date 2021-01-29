@@ -3,6 +3,13 @@ import { getTasks } from './getTasks';
 import { Task } from './types';
 import { RNVTreeItem } from './view';
 
+const runningTasks: Record<string, vscode.TaskExecution> = {};
+
+vscode.tasks.onDidEndTask((event) => {
+    const { name } = event.execution.task;
+    if (runningTasks[name]) delete runningTasks[name];
+});
+
 export const taskToCommand = (task: Task) => {
     const configuration = vscode.workspace.getConfiguration('rnv');
     const runner = configuration.get<string>('runner');
@@ -14,16 +21,23 @@ export const taskToCommand = (task: Task) => {
     return command;
 };
 
-export const launch = (task?: Task) => {
-    const terminal = vscode.window.createTerminal({
-        name: 'RNV',
-    });
-    terminal.show();
-    terminal.sendText(
-        task
-            ? taskToCommand(task)
-            : 'npx rnv --help',
-    );
+export const launch = async (task?: Task) => {
+    if (!task) return;
+    const { action, platform, appConfig, buildScheme } = task;
+    const name = `RNV - ${action} - ${platform} - ${appConfig} - ${buildScheme}`;
+    if (runningTasks[name]) {
+        vscode.window.showErrorMessage('This task is already running!');
+        return;
+    }
+    const command = taskToCommand(task);
+    const execution = await vscode.tasks.executeTask(new vscode.Task(
+        { type: 'rnv', ...task },
+        vscode.TaskScope.Workspace,
+        name,
+        command,
+        new vscode.ShellExecution(command)
+    ));
+    runningTasks[name] = execution;
 };
 
 export const copy = (item: RNVTreeItem) => {
@@ -61,3 +75,11 @@ export const start = () => askAndLaunch('start');
 export const run = () => askAndLaunch('run');
 export const build = () => askAndLaunch('build');
 export const deploy = () => askAndLaunch('deploy');
+
+export const stop = async () => {
+    const name = await ask(Object.keys(runningTasks), 'TASK TO STOP');
+    if (name === null) return;
+    const execution = runningTasks[name];
+    if (!execution) return;
+    execution.terminate();
+};

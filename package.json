@@ -39,6 +39,10 @@
 			{
 				"command": "extension.rnv.deploy",
 				"title": "RNV Deploy"
+			},
+			{
+				"command": "extension.rnv.stop",
+				"title": "RNV Stop running task"
 			}
 		],
 		"views": {
