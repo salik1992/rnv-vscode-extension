@@ -21,10 +21,16 @@ export const taskToCommand = (task: Task) => {
     return command;
 };
 
+const taskToName = (task: Task) => {
+    let name = `RNV - ${task.action} - ${task.platform}`;
+    if (task.appConfig) name += ` - ${task.appConfig}`;
+    if (task.buildScheme) name += ` - ${task.buildScheme}`;
+    return name;
+};
+
 export const launch = async (task?: Task) => {
     if (!task) return;
-    const { action, platform, appConfig, buildScheme } = task;
-    const name = `RNV - ${action} - ${platform} - ${appConfig} - ${buildScheme}`;
+    const name = taskToName(task);
     if (runningTasks[name]) {
         vscode.window.showErrorMessage('This task is already running!');
         return;
@@ -82,4 +88,20 @@ export const stop = async () => {
     const execution = runningTasks[name];
     if (!execution) return;
     execution.terminate();
+};
+
+export const favourite = async () => {
+    const configuration = vscode.workspace.getConfiguration('rnv');
+    const favourites = configuration.get<Task[]>('favourites');
+    if (!favourites || favourites.length === 0) {
+        vscode.window.showInformationMessage('Please define your favourite commands in settings!');
+        return;
+    }
+    const tasksByName: Record<string, Task> = {};
+    favourites.forEach((task) => {
+        tasksByName[taskToName(task)] = task;
+    });
+    const taskName = await ask(favourites.map(taskToName), 'CHOOSE A CONFIGURATION');
+    if (taskName === null) return;
+    launch(tasksByName[taskName]);
 };

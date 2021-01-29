@@ -43,6 +43,10 @@
 			{
 				"command": "extension.rnv.stop",
 				"title": "RNV Stop running task"
+			},
+			{
+				"command": "extension.rnv.favourite",
+				"title": "RNV Launch favourite command"
 			}
 		],
 		"views": {
@@ -68,6 +72,11 @@
 					"type": "string",
 					"default": "npx",
 					"description": "Run rnv through a runner like npx for example. Leave empty to run rnv directly."
+				},
+				"rnv.favourites": {
+					"type": "array",
+					"default": [],
+					"markdownDescription": "Define your favourite rnv commands. Each command should be an object like this:\n```json\n{ \"action\": \"start\", \"platform\": \"web\", \"appConfig\": \"base\", \"buildScheme\": \"debug\" }\n```"
 				}
 			}
 		}
