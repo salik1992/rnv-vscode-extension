@@ -23,6 +23,22 @@
 				"category": "context",
 				"command": "extension.rnv.copy",
 				"title": "Copy command"
+			},
+			{
+				"command": "extension.rnv.start",
+				"title": "RNV Start"
+			},
+			{
+				"command": "extension.rnv.run",
+				"title": "RNV Run"
+			},
+			{
+				"command": "extension.rnv.build",
+				"title": "RNV Build"
+			},
+			{
+				"command": "extension.rnv.deploy",
+				"title": "RNV Deploy"
 			}
 		],
 		"views": {
