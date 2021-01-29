@@ -18,7 +18,9 @@ const getConfigs = async (rnvConfig: RnvConfig): Promise<Record<string, RawConfi
             dirs.forEach((dir) => {
                 try {
                     // eslint-disable-next-line @typescript-eslint/no-var-requires
-                    const config: RawConfig = require(path.resolve(configsRoot, dir, 'renative.json'));
+                    const config: RawConfig = require(
+                        path.resolve(configsRoot, dir, 'renative.json'),
+                    );
                     configs[config.id ?? dir] = config;
                 } catch (e) {
                     console.log('Ignoring config ', dir);
@@ -103,7 +105,11 @@ const getTasksByPlatform = (
                 tasksByPlatform[platformName][configName][scheme] = {};
                 TASKS.forEach((task) => {
                     tasksByPlatform[platformName][configName][scheme][task] = {
-                        platform: platformName, config: configName, scheme, task, isTask: true
+                        platform: platformName,
+                        appConfig: configName,
+                        buildScheme: scheme,
+                        action: task,
+                        isTask: true,
                     };
                 });
             });

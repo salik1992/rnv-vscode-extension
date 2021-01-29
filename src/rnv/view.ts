@@ -6,28 +6,26 @@ type AnyTask = TaskByPlatform | TaskByConfig | TaskByScheme | TaskByTaskName;
 
 const isFinalTask = (data: AnyTask): data is TaskByTaskName => !!data.isTask;
 
-export class RNVTasksTreeView implements vscode.TreeDataProvider<RNVTask> {
-    getTreeItem(element: RNVTask): vscode.TreeItem {
+export class RNVTasksTreeView implements vscode.TreeDataProvider<RNVTreeItem> {
+    getTreeItem(element: RNVTreeItem): vscode.TreeItem {
         return element;
     }
 
-    getChildren(element?: RNVTask): Thenable<RNVTask[]> {
+    getChildren(element?: RNVTreeItem): Thenable<RNVTreeItem[]> {
         if (!element) {
-            return new Promise((resolve) => {
-                getTasks().then((tasks) => {
-                    resolve(Object.entries(tasks).map(([platformName, platform]) => (
-                        new RNVTask(
-                            platformName,
-                            platform,
-                            vscode.TreeItemCollapsibleState.Collapsed,
-                        )
-                    )));
-                });
-            });
+            return getTasks().then((tasks) => (
+                Object.entries(tasks).map(([platformName, platform]) => (
+                    new RNVTreeItem(
+                        platformName,
+                        platform,
+                        vscode.TreeItemCollapsibleState.Collapsed,
+                    )
+                )))
+            );
         } else {
             const { data } = element;
             return Promise.resolve(Object.entries(data!).map(([label, data]) => (
-                new RNVTask(
+                new RNVTreeItem(
                     label,
                     data,
                     isFinalTask(data)
@@ -39,7 +37,7 @@ export class RNVTasksTreeView implements vscode.TreeDataProvider<RNVTask> {
     }
 }
 
-export class RNVTask extends vscode.TreeItem {
+export class RNVTreeItem extends vscode.TreeItem {
     constructor(
         public readonly label: string,
         public readonly data: AnyTask,
@@ -48,7 +46,7 @@ export class RNVTask extends vscode.TreeItem {
         super(label, collapsibleState);
         this.tooltip = this.label;
         this.description = isFinalTask(data)
-            ? `rnv ${data.task} -p ${data.platform} -c ${data.config} -s ${data.scheme}`
+            ? `rnv ${data.action} -p ${data.platform} -c ${data.appConfig} -s ${data.buildScheme}`
             : '';
         if (isFinalTask(data)) {
             this.command = {

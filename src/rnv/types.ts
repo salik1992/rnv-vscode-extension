@@ -25,10 +25,10 @@ export type Config = {
 
 export type Task = {
     isTask: true,
-    config: string,
+    appConfig?: string,
     platform: string,
-    scheme: string,
-    task: string,
+    buildScheme?: string,
+    action: string,
 };
 
 export type TaskByTaskName = Record<string, Task>;

@@ -1,26 +1,32 @@
 import * as vscode from 'vscode';
-import { Task } from "./types";
-import { RNVTask } from './view';
+import { getTasks } from './getTasks';
+import { Task, TaskByPlatform } from './types';
+import { RNVTreeItem } from './view';
 
-const dataToCommand = (data: Task) => {
+export const taskToCommand = (task: Task) => {
     const configuration = vscode.workspace.getConfiguration('rnv');
     const runner = configuration.get<string>('runner');
-    return `${runner === '' ? '' : `${runner} `}rnv ${data.task} -p ${data.platform} -c ${data.config} -s ${data.scheme}`;
+    let command = runner === '' ? 'rnv' : `${runner} rnv`;
+    command += ` ${task.action}`;
+    command += ` -p ${task.platform}`;
+    if (task.appConfig) command += ` -c ${task.appConfig}`;
+    if (task.buildScheme) command += ` -s ${task.buildScheme}`;
+    return command;
 };
 
-export const launch = (data?: Task) => {
+export const launch = (task?: Task) => {
     const terminal = vscode.window.createTerminal({
         name: 'RNV',
     });
     terminal.show();
     terminal.sendText(
-        data
-            ? dataToCommand(data)
+        task
+            ? taskToCommand(task)
             : 'npx rnv --help',
     );
 };
 
-export const copy = (item: RNVTask) => {
+export const copy = (item: RNVTreeItem) => {
     // Only final item tasks can run this command
-    vscode.env.clipboard.writeText(dataToCommand(item.data as unknown as Task));
+    vscode.env.clipboard.writeText(taskToCommand(item.data as unknown as Task));
 };
