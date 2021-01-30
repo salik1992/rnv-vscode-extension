@@ -1,10 +1,11 @@
 import * as vscode from 'vscode';
+import { taskToCommand } from './actions';
 import { getTasks } from './getTasks';
-import { TaskByConfig, TaskByPlatform, TaskByScheme, TaskByTaskName } from './types';
+import { TaskByConfig, TaskByPlatform, TaskByScheme, TaskByTaskName, Task } from './types';
 
-type AnyTask = TaskByPlatform | TaskByConfig | TaskByScheme | TaskByTaskName;
+type AnyTask = TaskByPlatform | TaskByConfig | TaskByScheme | TaskByTaskName | Task;
 
-const isFinalTask = (data: AnyTask): data is TaskByTaskName => !!data.isTask;
+const isFinalTask = (data: AnyTask): data is Task => !!data.isTask;
 
 export class RNVTasksTreeView implements vscode.TreeDataProvider<RNVTreeItem> {
     getTreeItem(element: RNVTreeItem): vscode.TreeItem {
@@ -46,7 +47,7 @@ export class RNVTreeItem extends vscode.TreeItem {
         super(label, collapsibleState);
         this.tooltip = this.label;
         this.description = isFinalTask(data)
-            ? `rnv ${data.action} -p ${data.platform} -c ${data.appConfig} -s ${data.buildScheme}`
+            ? taskToCommand(data)
             : '';
         if (isFinalTask(data)) {
             this.command = {

@@ -28,7 +28,7 @@ export type Task = {
     appConfig?: string,
     platform: string,
     buildScheme?: string,
-    action: string,
+    command: string,
 };
 
 export type TaskByTaskName = Record<string, Task>;

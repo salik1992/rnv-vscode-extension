@@ -3,11 +3,12 @@ import * as path from 'path';
 import * as vscode from 'vscode';
 import { Config, Platform, RawConfig, RnvConfig, TaskByPlatform } from './types';
 
+const COMMANDS = ['start', 'run', 'build', 'deploy'];
+
 const cwd = (() => {
     if (!vscode.workspace.workspaceFolders) return __dirname;
     return vscode.workspace.workspaceFolders[0].uri.toString().replace('file:', '');
 })();
-
 
 const getConfigs = async (rnvConfig: RnvConfig): Promise<Record<string, RawConfig>> => new Promise(
     (resolve) => {
@@ -89,7 +90,6 @@ const parseConfigs = (configs: Record<string, Config | RawConfig>): Record<strin
 const getTasksByPlatform = (
     configs: Record<string, Config>,
 ): TaskByPlatform => {
-    const TASKS = ['start', 'run', 'build', 'deploy'];
     const tasksByPlatform: TaskByPlatform = {};
     Object.entries(configs).forEach(([configName, config]) => {
         const { platforms } = config;
@@ -103,12 +103,12 @@ const getTasksByPlatform = (
             const { schemes } = platform;
             schemes.forEach((scheme) => {
                 tasksByPlatform[platformName][configName][scheme] = {};
-                TASKS.forEach((task) => {
-                    tasksByPlatform[platformName][configName][scheme][task] = {
+                COMMANDS.forEach((command) => {
+                    tasksByPlatform[platformName][configName][scheme][command] = {
                         platform: platformName,
                         appConfig: configName,
                         buildScheme: scheme,
-                        action: task,
+                        command,
                         isTask: true,
                     };
                 });

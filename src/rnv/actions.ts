@@ -14,7 +14,7 @@ export const taskToCommand = (task: Task) => {
     const configuration = vscode.workspace.getConfiguration('rnv');
     const runner = configuration.get<string>('runner');
     let command = runner === '' ? 'rnv' : `${runner} rnv`;
-    command += ` ${task.action}`;
+    command += ` ${task.command}`;
     command += ` -p ${task.platform}`;
     if (task.appConfig) command += ` -c ${task.appConfig}`;
     if (task.buildScheme) command += ` -s ${task.buildScheme}`;
@@ -22,7 +22,7 @@ export const taskToCommand = (task: Task) => {
 };
 
 const taskToName = (task: Task) => {
-    let name = `RNV - ${task.action} - ${task.platform}`;
+    let name = `RNV - ${task.command} - ${task.platform}`;
     if (task.appConfig) name += ` - ${task.appConfig}`;
     if (task.buildScheme) name += ` - ${task.buildScheme}`;
     return name;
@@ -58,7 +58,7 @@ const ask = async (picks: string[], placeHolder: string) => (
     ) ?? { label: null }).label
 );
 
-const askForTask = async (action: string): Promise<Task | null> => {
+const askForTask = async (command: string): Promise<Task | null> => {
     const platforms = await getTasks();
     const platform = await ask(Object.keys(platforms), 'PLATFORM');
     if (platform === null) return null;
@@ -68,11 +68,11 @@ const askForTask = async (action: string): Promise<Task | null> => {
     const buildSchemes = appConfigs[appConfig];
     const buildScheme = await ask(Object.keys(buildSchemes), 'BUILD SCHEME');
     if (buildScheme === null) return null;
-    return { action, platform, appConfig, buildScheme, isTask: true };
+    return { command, platform, appConfig, buildScheme, isTask: true };
 };
 
-const askAndLaunch = async (action: string) => {
-    const task = await askForTask(action);
+const askAndLaunch = async (command: string) => {
+    const task = await askForTask(command);
     if (task === null) return;
     launch(task);
 };
