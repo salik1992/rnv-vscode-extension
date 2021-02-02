@@ -31,7 +31,13 @@ export type Task = {
     command: string,
 };
 
+export type FavouriteTask = Partial<Omit<Task, 'isTask'>> & {
+    name?: string,
+};
+
 export type TaskByTaskName = Record<string, Task>;
 export type TaskByScheme = Record<string, TaskByTaskName>;
 export type TaskByConfig = Record<string, TaskByScheme>;
 export type TaskByPlatform = Record<string, TaskByConfig>;
+
+export const COMMANDS = ['start', 'run', 'build', 'deploy'];

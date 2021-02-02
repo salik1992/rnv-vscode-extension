@@ -1,9 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as vscode from 'vscode';
-import { Config, Platform, RawConfig, RnvConfig, TaskByPlatform } from './types';
-
-const COMMANDS = ['start', 'run', 'build', 'deploy'];
+import { COMMANDS, Config, Platform, RawConfig, RnvConfig, TaskByPlatform } from './types';
 
 const cwd = (() => {
     if (!vscode.workspace.workspaceFolders) return __dirname;
