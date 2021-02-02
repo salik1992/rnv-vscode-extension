@@ -76,7 +76,7 @@
 				"rnv.favourites": {
 					"type": "array",
 					"default": [],
-					"markdownDescription": "Define your favourite rnv commands. Each command should be an object like this:\n```json\n{ \"command\": \"start\", \"platform\": \"web\", \"appConfig\": \"base\", \"buildScheme\": \"debug\" }\n```"
+					"description": "Define your favourite rnv commands. See README for more information."
 				}
 			}
 		}
