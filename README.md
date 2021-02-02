@@ -22,7 +22,7 @@ Each command should have at least one of these keys. The rest will be prompted.
 - appConfig: appConfig to use (same as -c parameter of rnv)
 - buildScheme: buildScheme to use (same as -s parameter or rnv)
 
-```json
+```ts
 {
     "rnv.favourites": [
         {   // will launch "rnv start -p web -c base -s debug"
