@@ -12,11 +12,11 @@ from VSCode command palette will prompt you for platform, appConfig and buildSch
 you the options to choose from, of course.
 
 ## Favourite commands
-Allows you to define you favourite commands to run. Head into settings to start adding your commands.
-Favourite commands are stored as an array of objects in settings:
+Allows you to define your favourite commands to run. Head into the settings to start adding your commands.
+Favourite commands are stored as an array of objects in the settings:
 
 Each command should have at least one of these keys. The rest will be prompted.
-- name: optional name of the configuration to display in the prompt menu (will be generated otherwise)
+- name: optional name of the configuration to display in the prompt menu (it will be generated otherwise)
 - command: rnv command (start, run, etc.)
 - platform: platform to work with (same as -p parameter of rnv)
 - appConfig: appConfig to use (same as -c parameter of rnv)
