@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { RNVTasksTreeView } from './rnv/view';
-import { launch, copy, start, build, run, deploy, stop, favourite } from './rnv/actions';
+import { launch } from './rnv/runner';
+import { copy, start, build, run, deploy, stop, favourite } from './rnv/actions';
 
 export function activate() {
     vscode.commands.registerCommand('extension.rnv.launch', launch);
