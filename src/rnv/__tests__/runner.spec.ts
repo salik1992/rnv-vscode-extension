@@ -42,8 +42,9 @@ describe('Runner', () => {
 
         it('should ask for a restart if the task is running', () => {
             launch(task);
+            const terminate = jest.fn();
             vscodeMock.tasks.taskExecutions.push(
-                { task: vscodeMock.tasks.executeTask.mock.calls[0][0] }
+                { task: vscodeMock.tasks.executeTask.mock.calls[0][0], terminate }
             );
             launch(task);
             expect(vscodeMock.window.showQuickPick).toHaveBeenCalledWith(

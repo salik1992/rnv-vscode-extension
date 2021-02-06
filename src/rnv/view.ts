@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { taskToCommand } from './actions';
+import { taskToCommand } from './utils';
 import { getTasks } from './getTasks';
 import { TaskByConfig, TaskByPlatform, TaskByScheme, TaskByTaskName, Task } from './types';
 
