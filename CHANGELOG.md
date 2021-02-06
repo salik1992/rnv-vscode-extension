@@ -3,6 +3,8 @@
 ## 0.2.0
 - added optional name to favourite commands
 - favourite commands can now be partials and will prompt you for missing info
+- using vscode tasks list to manage running rnv tasks
+- if task is already running, gives an option to restart
 
 ## 0.1.0
 - big code refactor
