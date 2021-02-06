@@ -3,7 +3,7 @@
 	"name": "rnv-vscode-extension",
 	"displayName": "ReNative",
 	"description": "ReNative extension for VSCode",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"publisher": "salik1992",
 	"repository": "https://github.com/salik1992/rnv-vscode-extension",
 	"engines": {
