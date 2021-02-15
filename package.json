@@ -25,6 +25,15 @@
 			},
 			{
 				"category": "RNV",
+				"command": "extension.rnv.refreshTree",
+				"title": "Refresh RNV Tree",
+				"icon": {
+                    "light": "resources/light/refresh.svg",
+                    "dark": "resources/dark/refresh.svg"
+                }
+			},
+			{
+				"category": "RNV",
 				"command": "extension.rnv.start",
 				"title": "Start"
 			},
@@ -64,6 +73,13 @@
 			]
 		},
 		"menus": {
+			"view/title": [
+                {
+                    "command": "extension.rnv.refreshTree",
+                    "when": "view == rnv",
+                    "group": "navigation"
+                }
+			],
 			"view/item/context": [
 				{
 					"command": "extension.rnv.copy",
@@ -73,6 +89,10 @@
 			"commandPalette": [
 				{
 					"command": "extension.rnv.copy",
+					"when": "false"
+				},
+				{
+					"command": "extension.rnv.refreshTree",
 					"when": "false"
 				},
 				{

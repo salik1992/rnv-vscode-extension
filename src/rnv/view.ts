@@ -8,6 +8,10 @@ type AnyTask = TaskByPlatform | TaskByConfig | TaskByScheme | TaskByTaskName | T
 const isFinalTask = (data: AnyTask): data is Task => !!data.isTask;
 
 export class RNVTasksTreeView implements vscode.TreeDataProvider<RNVTreeItem> {
+    private _onDidChangeTreeData = new vscode.EventEmitter<RNVTreeItem | undefined | null | void>();
+
+    readonly onDidChangeTreeData = this._onDidChangeTreeData.event;
+
     getTreeItem(element: RNVTreeItem): vscode.TreeItem {
         return element;
     }
@@ -35,6 +39,10 @@ export class RNVTasksTreeView implements vscode.TreeDataProvider<RNVTreeItem> {
                 )
             )));
         }
+    }
+
+    refresh() {
+        this._onDidChangeTreeData.fire();
     }
 }
 
