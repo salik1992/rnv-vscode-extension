@@ -32,7 +32,7 @@ export const launch = async (task?: RunnableTask) => {
             [YES, NO],
             { canPickMany: false, placeHolder: SHOULD_RESTART },
         );
-        if (shouldRestart === NO) return;
+        if (shouldRestart !== YES) return;
         runningTask.terminate();
     }
     run(command, name, task);
