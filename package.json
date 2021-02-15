@@ -13,47 +13,53 @@
 		"Other"
 	],
 	"activationEvents": [
-		"workspaceContains:**/renative.json",
-		"onCommand:extension.rnv.refresh"
+		"workspaceContains:**/renative.json"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"category": "context",
+				"category": "RNV",
 				"command": "extension.rnv.copy",
 				"title": "Copy command"
 			},
 			{
+				"category": "RNV",
 				"command": "extension.rnv.start",
-				"title": "RNV Start"
+				"title": "Start"
 			},
 			{
+				"category": "RNV",
 				"command": "extension.rnv.run",
-				"title": "RNV Run"
+				"title": "Run"
 			},
 			{
+				"category": "RNV",
 				"command": "extension.rnv.build",
-				"title": "RNV Build"
+				"title": "Build"
 			},
 			{
+				"category": "RNV",
 				"command": "extension.rnv.deploy",
-				"title": "RNV Deploy"
+				"title": "Deploy"
 			},
 			{
+				"category": "RNV",
 				"command": "extension.rnv.stop",
-				"title": "RNV Stop running task"
+				"title": "Stop running task"
 			},
 			{
+				"category": "RNV",
 				"command": "extension.rnv.favourite",
-				"title": "RNV Launch favourite command"
+				"title": "Launch favourite command"
 			}
 		],
 		"views": {
 			"explorer": [
 				{
 					"id": "rnv",
-					"name": "ReNative"
+					"name": "ReNative",
+					"when": "rnv:isActive"
 				}
 			]
 		},
@@ -62,6 +68,36 @@
 				{
 					"command": "extension.rnv.copy",
 					"when": "viewItem == rnvLaunch"
+				}
+			],
+			"commandPalette": [
+				{
+					"command": "extension.rnv.copy",
+					"when": "false"
+				},
+				{
+					"command": "extension.rnv.start",
+					"when": "rnv:isActive"
+				},
+				{
+					"command": "extension.rnv.run",
+					"when": "rnv:isActive"
+				},
+				{
+					"command": "extension.rnv.build",
+					"when": "rnv:isActive"
+				},
+				{
+					"command": "extension.rnv.deploy",
+					"when": "rnv:isActive"
+				},
+				{
+					"command": "extension.rnv.stop",
+					"when": "rnv:isActive"
+				},
+				{
+					"command": "extension.rnv.favourite",
+					"when": "rnv:isActive"
 				}
 			]
 		},
