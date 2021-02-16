@@ -3,7 +3,7 @@
 	"name": "rnv-vscode-extension",
 	"displayName": "ReNative",
 	"description": "ReNative extension for VSCode",
-	"version": "0.2.1",
+	"version": "0.2.2",
 	"publisher": "salik1992",
 	"repository": "https://github.com/salik1992/rnv-vscode-extension",
 	"engines": {
@@ -28,9 +28,9 @@
 				"command": "extension.rnv.refreshTree",
 				"title": "Refresh RNV Tree",
 				"icon": {
-                    "light": "resources/light/refresh.svg",
-                    "dark": "resources/dark/refresh.svg"
-                }
+					"light": "resources/light/refresh.svg",
+					"dark": "resources/dark/refresh.svg"
+				}
 			},
 			{
 				"category": "RNV",
@@ -74,11 +74,11 @@
 		},
 		"menus": {
 			"view/title": [
-                {
-                    "command": "extension.rnv.refreshTree",
-                    "when": "view == rnv",
-                    "group": "navigation"
-                }
+				{
+					"command": "extension.rnv.refreshTree",
+					"when": "view == rnv",
+					"group": "navigation"
+				}
 			],
 			"view/item/context": [
 				{
