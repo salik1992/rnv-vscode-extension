@@ -1,5 +1,13 @@
 # Changelog
 
+# 0.2.2
+- fixed restarting even if prompt cancelled by ESC, now it restarts only after clicking YES
+- fixed commands showing up in command palette even if the extension was inactive
+- added refresh functionality to the tree view
+
+## 0.2.1
+- fixed build bug
+
 ## 0.2.0
 - added optional name to favourite commands
 - favourite commands can now be partials and will prompt you for missing info
